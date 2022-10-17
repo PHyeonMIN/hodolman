@@ -3,6 +3,7 @@ package com.hodolog.service;
 import com.hodolog.domain.Post;
 import com.hodolog.repository.PostRepository;
 import com.hodolog.request.PostCreate;
+import com.hodolog.response.PostResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -56,11 +57,11 @@ class PostServiceTest {
         postRepository.save(requestPost);
 
         // when
-        Post post = postService.get(requestPost.getId());
+        PostResponse response = postService.get(requestPost.getId());
 
         // then
-        assertNotNull(post);
-        assertEquals("foo",post.getTitle());
-        assertEquals("bar",post.getContent());
+        assertNotNull(response);
+        assertEquals("foo",response.getTitle());
+        assertEquals("bar",response.getContent());
     }
 }

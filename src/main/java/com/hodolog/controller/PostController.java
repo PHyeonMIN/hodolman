@@ -2,6 +2,7 @@ package com.hodolog.controller;
 
 import com.hodolog.domain.Post;
 import com.hodolog.request.PostCreate;
+import com.hodolog.response.PostResponse;
 import com.hodolog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -128,8 +129,10 @@ public class PostController {
      */
 
     @GetMapping("/posts/{postId}")
-    public Post get(@PathVariable(name ="postId") Long id){
-        Post post = postService.get(id);
-        return post;
+    public PostResponse get(@PathVariable(name ="postId") Long id){
+        PostResponse response = postService.get(id);
+        return response;
     }
+
+
 }
