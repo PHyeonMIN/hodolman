@@ -8,13 +8,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PostService {
-
     private final PostRepository postRepository;
 
     public void write(PostCreate postCreate){
@@ -43,4 +43,10 @@ public class PostService {
         return response;
     }
 
+    public List<PostResponse> getList() {
+       return postRepository.findAll().stream()
+//               .map(post -> new PostResponse(post)) // 밑과 같음
+               .map(PostResponse::new)
+               .collect(Collectors.toList());
+    }
 }

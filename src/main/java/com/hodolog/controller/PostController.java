@@ -1,6 +1,5 @@
 package com.hodolog.controller;
 
-import com.hodolog.domain.Post;
 import com.hodolog.request.PostCreate;
 import com.hodolog.response.PostResponse;
 import com.hodolog.service.PostService;
@@ -132,6 +131,15 @@ public class PostController {
     public PostResponse get(@PathVariable(name ="postId") Long id){
         PostResponse response = postService.get(id);
         return response;
+    }
+
+    /**
+     * 조회 API
+     * 여러개의 글을 조회 API
+     */
+    @GetMapping("/posts")
+    public List<PostResponse> getList() {
+        return postService.getList();
     }
 
 
