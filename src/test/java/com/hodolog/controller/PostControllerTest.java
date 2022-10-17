@@ -11,8 +11,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // ctrl + shift + T : 테스트 생성
 
@@ -35,7 +34,23 @@ class PostControllerTest {
                         .content("{\"title\": \"제목입니다.\", \"content\": \"내용입니다.\"}")
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello World"))
+                .andExpect(content().string("{}"))
+                .andDo(MockMvcResultHandlers.print());                          // HTTP 요청에 대한 summary
+    }
+
+    @Test
+    @DisplayName("/posts 요청시 title 값은 필수다")
+    void test2() throws Exception {
+        // 글 제목
+        // 글 내용
+
+        // expected
+        mockMvc.perform(post("/posts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\": \"\", \"content\": \"내용입니다.\"}")
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("타이틀을 입력해주세요."))
                 .andDo(MockMvcResultHandlers.print());                          // HTTP 요청에 대한 summary
     }
 }
