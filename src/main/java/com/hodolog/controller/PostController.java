@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -122,5 +120,16 @@ public class PostController {
         //                  -> 코드를 잘짜라.
         //                  -> 한 번에 일괄적으로 잘 처리되는 케이스가 없다.
         //                  -> 잘 관리하는 형태가 중요하다.
+    }
+
+    /**
+     * /posts -> 글 전체 조회(검색 + 페이징)
+     * /posts/{postId} -> 글 한개만 조회
+     */
+
+    @GetMapping("/posts/{postId}")
+    public Post get(@PathVariable(name ="postId") Long id){
+        Post post = postService.get(id);
+        return post;
     }
 }
