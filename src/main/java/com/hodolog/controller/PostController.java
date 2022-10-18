@@ -1,6 +1,7 @@
 package com.hodolog.controller;
 
 import com.hodolog.request.PostCreate;
+import com.hodolog.request.PostEdit;
 import com.hodolog.request.PostSearch;
 import com.hodolog.response.PostResponse;
 import com.hodolog.service.PostService;
@@ -144,5 +145,9 @@ public class PostController {
         return postService.getList(postSearch);
     }
 
+    @PatchMapping("/posts/{postId}")
+    public void edit(@PathVariable Long postId, @RequestBody @Valid PostEdit request) {
+        postService.edit(postId, request);
+    }
 
 }
