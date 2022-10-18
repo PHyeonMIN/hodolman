@@ -3,10 +3,10 @@ package com.hodolog.service;
 import com.hodolog.domain.Post;
 import com.hodolog.repository.PostRepository;
 import com.hodolog.request.PostCreate;
+import com.hodolog.request.PostSearch;
 import com.hodolog.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,10 +44,10 @@ public class PostService {
         return response;
     }
 
-    public List<PostResponse> getList(Pageable pageable) {
+    public List<PostResponse> getList(PostSearch postSearch) {
         // web -> page 1 -> 0
 //        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC,"id"));
-       return postRepository.findAll(pageable).stream()
+       return postRepository.getList(postSearch).stream()
 //               .map(post -> new PostResponse(post)) // 밑과 같음
                .map(PostResponse::new)
                .collect(Collectors.toList());

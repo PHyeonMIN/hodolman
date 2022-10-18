@@ -1,12 +1,11 @@
 package com.hodolog.controller;
 
 import com.hodolog.request.PostCreate;
+import com.hodolog.request.PostSearch;
 import com.hodolog.response.PostResponse;
 import com.hodolog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -140,8 +139,9 @@ public class PostController {
      * 여러개의 글을 조회 API
      */
     @GetMapping("/posts")
-    public List<PostResponse> getList(@PageableDefault(size=5) Pageable pageable) { // yml 설정을 따르고 싶다면 @PageableDefault 제거
-        return postService.getList(pageable);
+//    public List<PostResponse> getList(@PageableDefault(size=5) Pageable pageable) { // yml 설정을 따르고 싶다면 @PageableDefault 제거
+    public List<PostResponse> getList(@ModelAttribute PostSearch postSearch) {
+        return postService.getList(postSearch);
     }
 
 
