@@ -68,7 +68,7 @@ public class PostService {
         PostEditor.PostEditorBuilder editorBuilder = post.toEditor();
         PostEditor postEditor = editorBuilder.title(postEdit.getTitle())
                 .content(postEdit.getContent())
-                .build();
+                .build();       // build 하는 순간에 생성자 호출
 
         post.edit(postEditor);
 
