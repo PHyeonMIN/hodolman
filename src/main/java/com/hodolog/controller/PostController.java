@@ -115,6 +115,7 @@ public class PostController {
 //        return Map.of("postId", postId);
 
         // Case3. 응답 필요 없음 -> 클라이언트에서 모든 POST(글) 데이터 context를 잘 관리함
+        request.validate();
         postService.write(request);
 
         // Bad Case : 서버에서 -> 반드시 이렇게 할껍니다! fix
