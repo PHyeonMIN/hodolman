@@ -54,6 +54,8 @@ test {
     outputs.dir snippetsDir
 }
 
+// gradle의 asciidoctor task는 test 실행 후 build에 snippet, index.html을 생성한다.
+// 그리고 gradle build시 bootJar가 실행되면서 build쪽에 있는 index.html을 /resources/static/docs로 복사한다.
 asciidoctor {
     inputs.dir snippetsDir
     configurations 'asciidoctorExt'
