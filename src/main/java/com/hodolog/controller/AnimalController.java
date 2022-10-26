@@ -6,6 +6,7 @@ package com.hodolog.controller;
 // cat -> 냐옹
 // dog -> 멍멍
 
+import com.hodolog.domain.AnimalType;
 import com.hodolog.service.animal.AnimalService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +33,15 @@ public class AnimalController {
     public String sound(@RequestParam String type){
         log.info("animalService={}, keys={}", animalServices, animalServices.keySet());
 
-        // "CAT" -> "catService"
-        AnimalService service = animalServices.get(type.toLowerCase() + "Service");
+        AnimalType animalType = AnimalType.valueOf(type);
+        AnimalService service = animalType.create();
         return service.getSound();
+
+//        // "CAT" -> "catService"
+//        AnimalService service = animalServices.get(type.toLowerCase() + "Service");
+//        return service.getSound();
+
+
 //        AnimalService service = animalServiceFinder.find(type);
 //        return service.getSound();
 

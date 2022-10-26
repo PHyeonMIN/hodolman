@@ -2,6 +2,7 @@ package com.hodolog.service.animal;
 
 import com.hodolog.domain.AnimalType;
 
+//@Component
 public class DogService implements AnimalService {
 
     @Override
