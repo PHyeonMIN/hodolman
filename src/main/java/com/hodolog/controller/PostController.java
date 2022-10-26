@@ -105,7 +105,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/posts")
-    public void post(@RequestBody @Valid PostCreate request) {
+    public void post(@RequestBody @Valid PostCreate request, @RequestHeader String authorization) {
         // Case1. 저장한 데이터 Entity -> response로 응답하기
 //        return postService.write(request);
 
@@ -115,8 +115,10 @@ public class PostController {
 //        return Map.of("postId", postId);
 
         // Case3. 응답 필요 없음 -> 클라이언트에서 모든 POST(글) 데이터 context를 잘 관리함
-        request.validate();
-        postService.write(request);
+        if( authorization.equals("hodolman")){
+            request.validate();
+            postService.write(request);
+        }
 
         // Bad Case : 서버에서 -> 반드시 이렇게 할껍니다! fix
         //                  -> 서버에서 차라리 유연하게 대응하는게 좋다.
