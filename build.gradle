@@ -63,6 +63,8 @@ asciidoctor {
 }
 
 bootJar {
+    enabled = true
+
     dependsOn asciidoctor
 
     copy {
@@ -73,4 +75,8 @@ bootJar {
 //        println ">>>>" + asciidoctor.outputDir
 //        into 'static/docs'
 //    }
+}
+
+jar {
+    enabled = false
 }
